@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import Icon from "../components/Icon.astro";
+import Reviews from "../components/Reviews.astro";
+import Photo from "../components/Photo.astro";
 import { site } from "../site.config";
 import { mark } from "../lib/text";
 
@@ -128,6 +130,24 @@ const h = site.home;
     </ul>
   </section>
 
+  <!-- Verkstaden -->
+  {site.images.facade && (
+    <section aria-label="Verkstaden">
+      <picture>
+        <source media="(max-width: 639px)" srcset="/bilder/fasad-1000.webp" />
+        <img
+          src={site.images.facade.src}
+          width={site.images.facade.width}
+          height={site.images.facade.height}
+          alt={site.images.facade.alt}
+          loading="lazy"
+          decoding="async"
+          class="block h-52 w-full object-cover object-[72%_50%] sm:h-auto"
+        />
+      </picture>
+    </section>
+  )}
+
   <!-- Kunder + om oss -->
   <section class="border-t border-line bg-tint">
     <div class="container-page grid gap-12 py-16 sm:py-20 lg:grid-cols-2 lg:gap-16">
@@ -158,6 +178,12 @@ const h = site.home;
         >
           {h.aboutLink} <Icon name="arrow" class="size-4" />
         </a>
+        {site.images.person && (
+          <figure class="mt-8 max-w-sm">
+            <Photo img={site.images.person} class="aspect-[4/3] object-[55%_30%]" />
+            <figcaption class="caps mt-3 text-ink">{site.person.name}</figcaption>
+          </figure>
+        )}
       </div>
     </div>
   </section>
@@ -176,4 +202,5 @@ const h = site.home;
       </div>
     </div>
   </section>
+  <Reviews />
 </Base>

@@ -171,6 +171,29 @@
   text-transform: uppercase;
 }
 
+/* Rullande omdömen: två kopior av listan, flyttas exakt en kopia åt vänster. */
+.reviews {
+  overflow: hidden;
+}
+.reviews-track {
+  display: flex;
+  width: max-content;
+  animation: reviews-roll 60s linear infinite;
+}
+.reviews-track > li {
+  margin-right: 1rem;
+}
+.reviews:hover .reviews-track,
+.reviews:focus-within .reviews-track,
+.reviews:focus .reviews-track {
+  animation-play-state: paused;
+}
+@keyframes reviews-roll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -179,5 +202,14 @@
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
+  }
+  .reviews {
+    overflow-x: auto;
+  }
+  .reviews-track {
+    animation: none;
+  }
+  .reviews-track > li[aria-hidden="true"] {
+    display: none;
   }
 }

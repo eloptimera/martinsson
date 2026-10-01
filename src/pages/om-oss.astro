@@ -31,6 +31,14 @@ const p = site.aboutPage;
         </a>
       </div>
     </div>
-    <Photo img={site.images.about} class="rounded" />
+    <div class="space-y-8">
+      <Photo img={site.images.about} class="rounded" />
+      {site.images.person && (
+        <figure>
+          <Photo img={site.images.person} class="aspect-[4/3] object-[55%_30%]" priority />
+          <figcaption class="caps mt-3 text-ink">{site.person.name}</figcaption>
+        </figure>
+      )}
+    </div>
   </div>
 </Base>

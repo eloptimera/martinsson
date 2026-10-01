@@ -19,6 +19,18 @@ export const site = {
     logo: null as null | Img,
     hero: null as null | Img,
     about: null as null | Img,
+    person: {
+      src: "/bilder/carl-martinsson.webp",
+      width: 1400,
+      height: 868,
+      alt: "Carl Martinsson i verkstaden",
+    } as null | Img,
+    facade: {
+      src: "/bilder/fasad.webp",
+      width: 2000,
+      height: 510,
+      alt: "Martinssons Billackering ABs verkstad med blå portar och skylt",
+    } as null | Img,
     services: {
       lackering: null as null | Img,
       plastreparationer: null as null | Img,
@@ -26,6 +38,29 @@ export const site = {
       lackvard: null as null | Img,
     },
   },
+
+  /** Personen på om oss-sidan. */
+  person: { name: "Carl Martinsson" },
+
+  /**
+   * Google-omdömen som visas i rullen längst ner på startsidan. Text och betyg är återgivna ordagrant.
+   * Lägg till eller ta bort rader här – rullen anpassar sig själv.
+   */
+  reviews: [
+    { name: "Henrik Fredricson", stars: 5, text: "Så fantastisk bra! Kan rekommendera till 100% …" },
+    {
+      name: "Per Olof Larsson",
+      stars: 4,
+      text: "Ett bra mottagande av trevlig Personal. Fast jag var lite försenad På en Fredag eftm 👍",
+    },
+    { name: "Björn Lundin", stars: 5, text: "Mycket trevligt bemötande och proffsigt utfört arbete" },
+    { name: "Lise Olofson", stars: 4, text: "Kunnig personal. Ger bra tips och råd" },
+    { name: "Lars Örtlund", stars: 4, text: "Bra bemötande och kunnig personal" },
+    { name: "Kaj Hellström", stars: 5, text: "Bra lack jobb." },
+    { name: "Roni Lindberg", stars: 4, text: "Bra bil lackering" },
+    { name: "Urban Himmerman", stars: 5, text: "Personlig service" },
+    { name: "Arto Huusko", stars: 5, text: "Förstklassiga" },
+  ] as { name: string; stars: number; text: string }[],
 
   company: {
     name: "Martinssons Billackering AB",

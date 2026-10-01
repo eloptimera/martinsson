@@ -1,0 +1,53 @@
+---
+import { site } from "../site.config";
+
+const reviews = site.reviews;
+const star =
+  "M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55L2.48 9.42l6.58-.96L12 2.5z";
+---
+
+{reviews.length > 0 && (
+  <section class="border-t border-line bg-tint py-14 sm:py-16" aria-labelledby="omdomen">
+    <div class="container-page">
+      <p class="caps text-brand">Omdömen från Google</p>
+      <h2 id="omdomen" class="mt-2 text-3xl sm:text-4xl">
+        Vad kunderna skriver
+      </h2>
+    </div>
+
+    <div class="reviews mt-8" tabindex="0" aria-label="Kundomdömen, rullar automatiskt">
+      <ul class="reviews-track">
+        {[0, 1].map((copy) =>
+          reviews.map((r) => (
+            <li
+              class="w-[18rem] shrink-0 border border-line bg-white p-6 sm:w-[22rem]"
+              aria-hidden={copy === 1 ? "true" : undefined}
+            >
+              <p
+                class="flex items-center gap-1 text-brand"
+                role="img"
+                aria-label={`${r.stars} av 5 stjärnor`}
+              >
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <svg viewBox="0 0 24 24" class="size-5" aria-hidden="true">
+                    <path
+                      d={star}
+                      fill={n <= r.stars ? "currentColor" : "none"}
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linejoin="round"
+                      class={n <= r.stars ? "" : "text-line"}
+                    />
+                  </svg>
+                ))}
+                <span class="ml-2 text-sm font-semibold text-ink">{r.stars}/5</span>
+              </p>
+              {r.text && <p class="mt-4 text-ink">{r.text}</p>}
+              <p class="mt-4 text-sm font-semibold text-muted-foreground">{r.name}</p>
+            </li>
+          )),
+        )}
+      </ul>
+    </div>
+  </section>
+)}
