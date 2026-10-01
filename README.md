@@ -20,7 +20,7 @@ bun run check     # typkontroll
    texter, SEO-titlar och beskrivningar. Skriv `*ord*` för att markera ett ord med gul understrykning.
    Tomma fält (e-post, öppettider) döljs automatiskt.
 3. Vill du ha andra färger: ändra värdena överst i `src/styles/global.css` (`--brand`, `--ink`, `--sun` m.fl.).
-4. Byt `public/favicon.svg`.
+4. Byt favicon-filerna i `public/` (`favicon.ico`, `favicon-32.png`, `icon-192.png`, `apple-touch-icon.png`).
 5. Skapa ett Vercel-projekt från repot (Framework Preset: **Astro**) och sätt miljövariablerna nedan.
 
 ## Miljövariabler (Vercel → Settings → Environment Variables)
