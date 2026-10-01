@@ -89,7 +89,7 @@ export const site = {
 
   /** Avisering högst upp på kontaktsidan. Tom sträng = ingen avisering. */
   notice:
-    "Färgbutiken har upphört sedan den 1 februari 2025. Företagskunder beställer via e-post: ange beställning och ett telefonnummer, så hör vi av oss när det är klart för leverans.",
+    "Färgbutiken upphörde den 1 februari 2025 efter 40 år. Tack till alla som har besökt oss. Företagskunder beställer via info@martinssonsbillackering.se: ange beställning och ett telefonnummer, så hör vi av oss när det är klart för leverans.",
 
   nav: [
     { href: "/", label: "Hem" },
@@ -234,7 +234,7 @@ export const site = {
   aboutPage: {
     title: "Om oss",
     intro:
-      "Martinssons Billackering är väl kända som förstahandsval av tjänster inom billackering, underredsbehandling, plastreparationer, lackkonservering och billacksbutik.",
+      "Martinssons Billackering är väl kända som förstahandsval av tjänster inom billackering, underredsbehandling, plastreparationer och lackkonservering.",
     quote:
       "Med över 60 års erfarenheter och kompetens i lackeringsbranschen är vi väl kända i bygden. Vår ambition är att hålla en hög servicenivå och tillgodose våra kunders önskemål.",
     body: "Våra tjänster skall kännetecknas av att vara levererade i rätt tid med hög kvalitet och att kunden alltid ges ett gott bemötande.",
