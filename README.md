@@ -1,7 +1,9 @@
 # Martinssons Billackering (Astro)
 
 Webbplats för Martinssons Billackering AB: snabb, statisk och utan backend. Byggd med Astro och Tailwind, **utan React**.
-Designen: sakligt och innehållsdrivet, med en blå färg (logotypens), tunna linjer och Inter. Sidorna fungerar lika bra med
+Designen: redaktionell och saklig, med ljusgrå yta, hårfina linjer, serif (Bodoni Moda) och DM Sans, och en blå färg (logotypens).
+Startsidans hero är en kaross i grundvitt som "lackeras" blå (`public/hero-car.webp`, se `src/pages/index.astro`).
+**Obs:** hero-bilden är en platshållare. Byt mot ett eget foto eller en licensierad bild innan lansering. Sidorna fungerar lika bra med
 eller utan bilder: lägg riktiga foton och logotyp under `images` i `src/site.config.ts`.
 
 ```sh

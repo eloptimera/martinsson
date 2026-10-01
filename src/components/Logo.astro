@@ -17,18 +17,21 @@ const img = site.images.logo;
     class:list={["h-11 w-auto", className]}
   />
 ) : (
-  <span
-    class:list={[
-      "inline-flex flex-col leading-[0.95] font-[family-name:var(--font-wordmark)] font-bold uppercase",
-      light ? "text-white" : "text-brand",
-      className,
-    ]}
-  >
-    <span class="text-[1.75rem] tracking-[0.01em]" aria-hidden="true">
-      {site.company.shortName}
+  <span class:list={["inline-flex flex-col leading-none", light ? "text-white" : "text-ink", className]}>
+    <span
+      class="font-[family-name:var(--font-serif)] text-[1.35rem] font-semibold tracking-[0.22em]"
+      aria-hidden="true"
+    >
+      {site.company.shortName.toUpperCase()}
     </span>
-    <span class="text-[1.05rem] tracking-[0.02em]" aria-hidden="true">
-      {site.company.tagline}
+    <span
+      class:list={[
+        "mt-1.5 text-[0.6rem] font-bold tracking-[0.32em]",
+        light ? "text-white/80" : "text-brand",
+      ]}
+      aria-hidden="true"
+    >
+      {site.company.tagline.toUpperCase()}
     </span>
     <span class="sr-only">{site.company.name}</span>
   </span>
