@@ -3,7 +3,10 @@ const esc = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 export function mark(text: string): string {
-  return esc(text).replace(/\*([^*]+)\*/g, '<em class="text-leaf italic">$1</em>');
+  return esc(text).replace(
+    /\*([^*]+)\*/g,
+    '<span class="underline decoration-signal decoration-[0.09em] underline-offset-[0.12em] [text-decoration-skip-ink:none]">$1</span>',
+  );
 }
 
 /** Ta bort *-markeringarna (för <title> och metadata). */

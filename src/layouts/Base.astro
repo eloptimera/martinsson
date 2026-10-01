@@ -9,35 +9,44 @@ interface Props {
   title: string;
   description: string;
   noindex?: boolean;
-  /** Ren vit startsida: ingen grön yta eller kort runt hero. */
-  white?: boolean;
 }
-const { title, description, noindex = false, white = false } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 
 const c = site.company;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "AutoPaintShop",
   name: c.name,
   description: site.seo.businessDescription,
   url: Astro.site?.href,
-  foundingDate: String(c.founded),
-  ...(c.phone ? { telephone: c.phoneLink } : {}),
-  ...(c.email ? { email: c.email } : {}),
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: c.street,
-    postalCode: c.zip,
-    addressLocality: c.postalCity,
-    addressCountry: "SE",
-  },
-  areaServed: [c.area],
+  telephone: c.phoneLink,
+  email: c.email,
+  ...(c.street
+    ? {
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: c.street,
+          postalCode: c.zip,
+          addressLocality: c.postalCity,
+          addressCountry: "SE",
+        },
+      }
+    : {}),
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+      opens: "07:00",
+      closes: "17:00",
+    },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Friday", opens: "07:00", closes: "13:00" },
+  ],
 };
 ---
 
 <!doctype html>
-<html lang="sv" data-site={site.id} style={white ? "--background:#ffffff" : undefined}>
+<html lang="sv" data-site={site.id}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,7 +54,7 @@ const jsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" content="#3fae4a" />
+    <meta name="theme-color" content="#243a96" />
     <meta property="og:site_name" content={c.name} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="sv_SE" />
@@ -62,24 +71,8 @@ const jsonLd = {
   </head>
   <body>
     <div class="flex min-h-screen flex-col">
-      {white ? (
-        <div class="mx-auto w-full max-w-[88rem]">
-          <Header />
-          <slot name="hero" />
-        </div>
-      ) : (
-        <div class="relative">
-          {/* Grön yta bakom kortet; kortets nedre kant sticker ut över den */}
-          <div aria-hidden="true" class="band-green absolute inset-x-0 top-0 h-[calc(100%-5rem)]" />
-          <div class="relative px-3 pt-3 sm:px-8 sm:pt-8 lg:px-14 lg:pt-10">
-            <div class="relative mx-auto max-w-[88rem] rounded-[2rem] bg-white shadow-2xl shadow-brand-deep/25">
-              <Header />
-              <slot name="hero" />
-            </div>
-          </div>
-        </div>
-      )}
-      <main id="innehall" class:list={["flex-1 overflow-x-clip", white ? "pt-4 sm:pt-8" : "pt-16 sm:pt-20"]}>
+      <Header />
+      <main id="innehall" class="flex-1 overflow-x-clip">
         <slot />
       </main>
       <Footer />

@@ -10,7 +10,6 @@ const lnk = "font-bold text-brand underline";
 
 <Base title={site.seo.privacy.title} description={site.seo.privacy.description}>
   <PageHero
-    slot="hero"
     eyebrow="Integritetspolicy"
     title="Så hanterar vi dina personuppgifter"
     intro="Här beskriver vi vilka personuppgifter vi samlar in via den här webbplatsen, varför, och vilka rättigheter du har enligt dataskyddsförordningen (GDPR)."
@@ -18,8 +17,8 @@ const lnk = "font-bold text-brand underline";
   <article class="container-page max-w-3xl pt-4 pb-24">
     <PolicySection title="Personuppgiftsansvarig">
       <p>
-        {c.name}, org.nr {c.orgnr}, {c.street}, {c.zip} {c.postalCity}, är personuppgiftsansvarig för
-        behandlingen. Du når oss via{" "}
+        {c.name}
+        {c.orgnr && `, org.nr ${c.orgnr}`}, är personuppgiftsansvarig för behandlingen. Du når oss via{" "}
         <a class={lnk} href="/kontakt">
           kontaktformuläret
         </a>

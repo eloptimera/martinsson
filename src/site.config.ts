@@ -2,248 +2,244 @@
  * ALLT kundspecifikt ligger här: företagsuppgifter, texter, tjänster och SEO.
  * Ny kund = kopiera repot, ändra den här filen (och vid behov färgerna överst i src/styles/global.css).
  *
- * Skriv *ord* med stjärnor runt för att markera det (kursivt och grönt) i rubriker.
- * Tomma fält (telefon, e-post, öppettider) döljs automatiskt på sajten.
+ * Skriv *ord* med stjärnor runt för att markera det (understruket i signalfärg) i rubriker.
+ * Tomma fält (adress, orgnr) döljs automatiskt på sajten.
  */
 import type { IconName } from "./components/icons";
 
 export const site = {
   /** Kort id som skickas med varje formulär, så en central mottagare vet vilken sajt det kom från. */
-  id: "vastgota-tradgard",
+  id: "martinssons-billackering",
 
   company: {
-    name: "Västgöta Trädgårdsservice AB",
-    shortName: "Västgöta",
-    tagline: "Trädgårdsservice",
-    city: "Göteborg",
-    area: "Göteborg med omnejd",
-    founded: 2021,
-    orgnr: "559347-2243",
-    street: "Hammarkroken 172",
-    zip: "424 36",
-    postalCity: "Angered",
-    phone: "",
-    phoneLink: "",
-    email: "",
-    hours: [] as { days: string; time: string }[],
-    taxNote: "Godkänd för F-skatt, registrerad för moms och som arbetsgivare",
-    people: [{ name: "Hernan Tomas Castellon Portal", role: "VD" }],
+    name: "Martinssons Billackering AB",
+    shortName: "Martinssons",
+    tagline: "Billackering AB",
+    city: "",
+    area: "",
+    founded: 0,
+    orgnr: "",
+    street: "",
+    zip: "",
+    postalCity: "",
+    phone: "0512-105 74",
+    phoneLink: "+4651210574",
+    email: "info@martinssonsbillackering.se",
+    hours: [
+      { days: "Måndag – torsdag", time: "07:00 – 17:00" },
+      { days: "Fredag", time: "07:00 – 13:00" },
+      { days: "Lördag", time: "Stängt" },
+      { days: "Söndag", time: "Stängt" },
+    ] as { days: string; time: string }[],
+    hoursNote: "Stängt för frukost kl 09.00–09.30 och lunch kl 13.00–14.00.",
+    taxNote: "",
+    people: [] as { name: string; role: string }[],
   },
+
+  /** Avisering högst upp på kontaktsidan. Tom sträng = ingen avisering. */
+  notice:
+    "Färgbutiken har upphört sedan den 1 februari 2025. Företagskunder beställer via e-post: ange beställning och ett telefonnummer, så hör vi av oss när det är klart för leverans.",
 
   nav: [
     { href: "/", label: "Hem" },
     { href: "/tjanster", label: "Tjänster" },
     { href: "/om-oss", label: "Om oss" },
+    { href: "/samarbetspartners", label: "Samarbetspartners" },
     { href: "/kontakt", label: "Kontakt" },
   ],
-  navCta: { href: "/kontakt", label: "Få fri offert" },
+  navCta: { href: "/kontakt", label: "Begär offert" },
 
-  /**
-   * Hero-bild. Lämna som null för den genererade gräsön. Vill du använda ett riktigt foto eller en
-   * 3D-render (PNG/WebP med transparent bakgrund fungerar bäst): lägg filen i /public och fyll i
-   * t.ex. { src: "/hero.webp", width: 1600, height: 1200 }.
-   */
-  heroImage: {
-    src: "/hero-island.webp",
-    width: 1248,
-    height: 1150,
-    srcset: "/hero-island-800.webp 800w, /hero-island.webp 1248w",
-  } as null | { src: string; width: number; height: number; srcset?: string },
-
-  /** Titel och beskrivning per sida (visas i Google och när sidan delas). */
   seo: {
     home: {
-      title: "Trädgårdsservice i Göteborg – Västgöta Trädgårdsservice AB",
+      title: "Billackering – Martinssons Billackering AB",
       description:
-        "Trädgårdsskötsel i Göteborg med omnejd: trädbeskärning, häckklippning, gräsklippning och rensning av rabatter. RUT-avdrag direkt på fakturan. Få fri offert.",
+        "Billackering, rostskydd, lackvård och plastreparationer för privatpersoner, försäkringsbolag och företag. Över 60 års erfarenhet. Begär offert.",
     },
     services: {
-      title: "Trädgårdstjänster i Göteborg – Västgöta Trädgårdsservice AB",
+      title: "Tjänster: lackering, rostskydd, lackvård och plastreparationer – Martinssons Billackering AB",
       description:
-        "Trädbeskärning, häckklippning, gräsklippning och rensning av rabatter i Göteborg, bland annat i Angered. Privatpersoner, bostadsrättsföreningar och företag. Fri offert.",
+        "Lackering, rostskydd med vaxbaserade medel, lackvård och plastreparationer. Se vad vi gör och begär offert.",
     },
     about: {
-      title: "Om oss – Västgöta Trädgårdsservice AB, Angered",
+      title: "Om oss – Martinssons Billackering AB",
       description:
-        "Västgöta Trädgårdsservice AB är ett litet, personligt trädgårdsbolag med bas i Angered. Läs om hur vi arbetar med trädgårdar och grönytor i Göteborg och Västra Götaland.",
+        "Med över 60 års erfarenhet och kompetens i lackeringsbranschen är Martinssons Billackering välkända som förstahandsval inom billackering.",
+    },
+    partners: {
+      title: "Samarbetspartners – Martinssons Billackering AB",
+      description: "Våra samarbetspartners och leverantörer inom lack, rostskydd och branschen.",
     },
     contact: {
-      title: "Boka trädgårdshjälp eller begär fri offert – Västgöta Trädgårdsservice AB",
+      title: "Kontakt och öppettider – Martinssons Billackering AB",
       description:
-        "Berätta om din trädgård så återkommer vi med en fri offert. Västgöta Trädgårdsservice AB, Hammarkroken 172, Angered.",
+        "Ring 0512-105 74 eller skicka en förfrågan. Öppettider och kontaktuppgifter till Martinssons Billackering AB.",
     },
     privacy: {
-      title: "Integritetspolicy – Västgöta Trädgårdsservice AB",
-      description: "Så behandlar Västgöta Trädgårdsservice AB dina personuppgifter när du kontaktar oss.",
+      title: "Integritetspolicy – Martinssons Billackering AB",
+      description: "Så behandlar Martinssons Billackering AB dina personuppgifter när du kontaktar oss.",
     },
-    notFound: { title: "Sidan finns inte – Västgöta Trädgårdsservice AB", description: "Sidan finns inte." },
+    notFound: { title: "Sidan finns inte – Martinssons Billackering AB", description: "Sidan finns inte." },
     businessDescription:
-      "Trädgårdsbolag i Angered, Göteborg. Trädbeskärning, häckklippning, gräsklippning och rensning av rabatter för privatpersoner, bostadsrättsföreningar och företag.",
+      "Billackering, underredsbehandling, plastreparationer, lackkonservering och rostskydd för privatpersoner, försäkringsbolag och företag.",
   },
 
   services: [
     {
-      id: "tradbeskarning",
-      title: "Trädbeskärning",
-      short:
-        "Säker och fackmannamässig beskärning av fruktträd och prydnadsträd som främjar tillväxt och trygghet i trädgården.",
+      id: "lackering",
+      title: "Lackering",
+      short: "Billackering för privatpersoner, försäkringsbolag och företag.",
       points: [
-        "Beskärning av fruktträd och prydnadsträd",
-        "Främjar tillväxt, blomning och skörd",
-        "Skapar ett säkrare och mer välskött träd",
+        "Lackering för privatpersoner, försäkringsbolag och företag",
+        "Underredsbehandling och lackkonservering",
+        "Leverans i rätt tid och med hög kvalitet",
       ],
-      icon: "tree" as IconName,
+      icon: "spray" as IconName,
     },
     {
-      id: "hackklippning",
-      title: "Häckklippning",
-      short: "Vi formklipper och trimmar alla typer av häckar så att de håller sig täta, raka och friska.",
+      id: "rostskydd",
+      title: "Rostskydd",
+      short:
+        "En kompletterande behandling med vaxbaserade medel är en förutsättning för att hålla rosten borta.",
       points: [
-        "Formklippning och trimning av alla typer av häckar",
-        "Engångsuppdrag eller återkommande",
-        "Prydliga, raka linjer och friska häckar",
+        "Behandling med vaxbaserade medel",
+        "Kompletterar bilens ordinarie rostskydd",
+        "Hjälper till att hålla rosten borta",
       ],
-      icon: "scissors" as IconName,
+      icon: "shield" as IconName,
     },
     {
-      id: "gresklippning",
-      title: "Gräsklippning",
+      id: "lackvard",
+      title: "Lackvård",
       short:
-        "Regelbunden eller enstaka klippning av gräsmattan, med kantstrimning för en välansad och grön gräsmatta.",
+        "Ge din bil regelbunden lackservice och du får en mer lättvättad bil, bättre glans och en lack som står sig länge.",
       points: [
-        "Regelbunden klippning eller enstaka tillfällen",
-        "Kantstrimning längs rabatter och stenläggning",
-        "Anpassat efter din tomts storlek",
+        "Regelbunden lackservice",
+        "Mer lättvättad bil och bättre glans",
+        "En lack som står sig länge",
       ],
-      icon: "sprout" as IconName,
+      icon: "sparkles" as IconName,
     },
     {
-      id: "rabatter",
-      title: "Rensning av rabatter",
-      short:
-        "Vi rensar bort ogräs, kantar till rabatterna och ser till att dina planteringar får bästa möjliga förutsättningar.",
+      id: "plastreparationer",
+      title: "Plastreparationer",
+      short: "Reparation av plastdetaljer på bilen, med efterföljande lackering.",
       points: [
-        "Rensning av ogräs i rabatter och planteringar",
-        "Kantning så att rabatterna syns och hålls i form",
-        "Ger växterna bättre förutsättningar att trivas",
+        "Reparation av skadade plastdetaljer",
+        "Efterföljande lackering i rätt kulör",
+        "Kontakta oss så bedömer vi skadan",
       ],
-      icon: "flower" as IconName,
+      icon: "wrench" as IconName,
     },
   ],
 
   home: {
-    headline: "Professionell *trädgårdsskötsel* i Göteborg med omnejd",
-    text: "Vi hjälper dig att hålla din trädgård och dina grönytor levande, välskötta och vackra året om.",
-    cta: "Få fri offert",
+    eyebrow: "Billackering",
+    headline: "Lackering som *håller* – med över 60 års erfarenhet",
+    text: "Billackering, rostskydd, lackvård och plastreparationer för privatpersoner, försäkringsbolag och företag.",
+    cta: "Begär offert",
     ctaSecondary: "Våra tjänster",
-    steps: [
+    badge: "Över 60 års erfarenhet",
+
+    quickServices: "Våra tjänster",
+    quickHours: "Öppettider",
+    quickContact: "Kontakta oss",
+
+    servicesEyebrow: "Tjänster",
+    servicesHeading: "Fyra tjänster för en *välskött* lack",
+
+    customersEyebrow: "Våra kunder",
+    customersHeading: "För privatpersoner, försäkringsbolag och *företag*",
+    customers: [
       {
-        icon: "clipboard" as IconName,
-        title: "Begär offert",
-        text: "Berätta om din trädgård via formuläret.",
+        icon: "users" as IconName,
+        title: "Privatpersoner",
+        text: "Lackering, lackvård och rostskydd till din egen bil.",
       },
       {
-        icon: "calendar" as IconName,
-        title: "Boka tid",
-        text: "Vi återkommer och bokar en tid som passar dig.",
+        icon: "shield" as IconName,
+        title: "Försäkringsbolag",
+        text: "Lackering och reparationer i samband med skadeärenden.",
       },
       {
-        icon: "leaf" as IconName,
-        title: "Vi sköter jobbet",
-        text: "Vi utför arbetet noggrant och fackmannamässigt.",
-      },
-      {
-        icon: "sun" as IconName,
-        title: "Njut av trädgården",
-        text: "Du får en välskött och vacker trädgård.",
+        icon: "building" as IconName,
+        title: "Företag",
+        text: "Lackering för företag. Företagskunder kan beställa via e-post.",
       },
     ],
-
-    servicesEyebrow: "Våra tjänster",
-    servicesHeading: "Allt som behövs för en *välskött* trädgård",
-    servicesIntro:
-      "Vi tar hand om träd, häckar, gräsmatta och rabatter, för privatpersoner, bostadsrättsföreningar och företag.",
-
-    rutEyebrow: "RUT-avdrag",
-    rutHeading: "Halva arbetskostnaden – direkt på *fakturan*",
-    rutText:
-      "Vi har F-skatt, vilket gör att du som privatperson kan använda RUT-avdraget för våra tjänster. Du får 50 % avdrag på arbetskostnaden direkt på fakturan.",
-    rutPoints: [
-      "50 % avdrag på arbetskostnaden",
-      "Avdraget dras direkt på fakturan",
-      "Gäller dig som privatperson",
-    ],
-    rutNote:
-      "Avdraget är högst 75 000 kr per person och år. Reglerna kan ändras, så kontrollera alltid aktuella villkor hos Skatteverket.",
 
     aboutEyebrow: "Om oss",
-    aboutHeading: "Det lilla, personliga trädgårdsbolaget i *Angered*",
-    aboutText:
-      "Västgöta Trädgårdsservice AB är ett litet, personligt trädgårdsbolag med bas i Angered. Med fokus på noggrannhet, kvalitet och personlig service hjälper vi privatpersoner, bostadsrättsföreningar och företag i hela Göteborgsområdet.",
+    aboutHeading: "Välkända i lackeringsbranschen",
+    aboutQuote:
+      "Med över 60 års erfarenheter och kompetens i lackeringsbranschen är vi väl kända i bygden. Vår ambition är att hålla en hög servicenivå och tillgodose våra kunders önskemål.",
     aboutLink: "Läs mer om oss",
-    audiences: ["Privatpersoner", "Bostadsrättsföreningar", "Företag"],
 
-    ctaEyebrow: "Kontakt",
-    ctaHeading: "Redo för en *grönare* trädgård?",
+    ctaEyebrow: "Offert",
+    ctaHeading: "Berätta vad som ska *lackeras*",
   },
 
   servicesPage: {
-    eyebrow: "Våra tjänster",
-    title: "Trädgårdsskötsel för *träd, häckar* och gräsmattor",
+    eyebrow: "Tjänster",
+    title: "Allt för en *välskött* lack",
     intro:
-      "Från trädbeskärning och häckklippning till gräsklippning och rensning av rabatter, i Göteborg med omnejd.",
+      "Lackering, rostskydd, lackvård och plastreparationer. Våra tjänster kännetecknas av att vara levererade i rätt tid med hög kvalitet.",
     quoteLabel: (service: string) => `Begär offert på ${service.toLowerCase()}`,
   },
 
   aboutPage: {
     eyebrow: "Om oss",
-    title: "Ett litet team med *stolthet* i hantverket",
+    title: "Över *60 år* i lackeringsbranschen",
     intro:
-      "Västgöta Trädgårdsservice AB startades 2021 med visionen att erbjuda pålitlig och effektiv grönyteskötsel i Västra Götaland.",
-    body: "Vi sätter stolthet i det hantverk trädgårdsskötsel faktiskt är. Ingen trädgård är för liten eller för stor för oss. Vi anpassar alltid uppdragen efter dina unika behov och önskemål.",
+      "Martinssons Billackering är väl kända som förstahandsval av tjänster inom billackering, underredsbehandling, plastreparationer, lackkonservering och billacksbutik.",
+    quote:
+      "Med över 60 års erfarenheter och kompetens i lackeringsbranschen är vi väl kända i bygden. Vår ambition är att hålla en hög servicenivå och tillgodose våra kunders önskemål.",
+    body: "Våra tjänster skall kännetecknas av att vara levererade i rätt tid med hög kvalitet och att kunden alltid ges ett gott bemötande.",
     values: [
       {
-        icon: "sprout" as IconName,
-        title: "Noggrannhet",
-        text: "Rena kanter, jämna häckar och väl omhändertagna rabatter. Det är detaljerna som gör skillnaden.",
-        style: "bg-brand text-white",
+        icon: "badge" as IconName,
+        title: "Erfarenhet",
+        text: "Över 60 års erfarenhet och kompetens i lackeringsbranschen.",
       },
       {
-        icon: "shield" as IconName,
+        icon: "wrench" as IconName,
         title: "Kvalitet",
-        text: "Vi gör jobbet ordentligt och fackmannamässigt, oavsett om det gäller ett träd eller en hel gräsmatta.",
-        style: "bg-brand-deep text-white",
+        text: "Hög kvalitet i varje uppdrag, från underredsbehandling till färdig lack.",
       },
       {
-        icon: "users" as IconName,
-        title: "Personlig service",
-        text: "Du pratar med de som gör jobbet. Vi lyssnar på dina önskemål och anpassar efter dem.",
-        style: "bg-tint text-ink",
+        icon: "handshake" as IconName,
+        title: "Bemötande",
+        text: "Kunden ska alltid ges ett gott bemötande och levereras i rätt tid.",
       },
     ],
-    teamEyebrow: "Företaget",
-    teamHeading: "Ansvarig",
-    factsEyebrow: "Fakta om företaget",
-    facts: [
-      { label: "Bransch", value: "Skötsel och underhåll av grönytor" },
-      { label: "Skatt", value: "Godkänd för F-skatt, registrerad för moms och som arbetsgivare" },
-      { label: "Kunder", value: "Privatpersoner, bostadsrättsföreningar och företag" },
-      { label: "Verksamhetsområde", value: "Göteborg med omnejd" },
+  },
+
+  partnersPage: {
+    eyebrow: "Samarbetspartners",
+    title: "Våra *samarbetspartners*",
+    intro: "Leverantörer och branschorganisationer vi samarbetar med.",
+    partners: [
+      { name: "Glasurit", url: "https://www.glasurit.se" },
+      { name: "Sikkens Vehicle Refinishes", url: "https://www.sikkensvr.com" },
+      { name: "Dinitrol Center", url: "https://www.dinitrolcenter.se" },
+      { name: "Smart Abrasives", url: "https://www.smartab.se" },
+      { name: "MRF", url: "https://mrf.se" },
     ],
   },
 
   contactPage: {
-    eyebrow: "Kontakt & offert",
-    title: "Boka trädgårdshjälp eller begär *fri offert*",
-    intro: "Berätta om din trädgård och vad du behöver hjälp med så återkommer vi med ett förslag.",
-    formTitle: "Berätta om din trädgård",
-    serviceLabel: "Vilken tjänst önskas?",
+    eyebrow: "Kontakt",
+    title: "Begär *offert* eller ring oss",
+    intro:
+      "Beskriv vad som ska lackeras eller repareras så återkommer vi. Du kan också ringa oss under våra öppettider.",
+    formTitle: "Skicka en förfrågan",
+    serviceLabel: "Vad gäller det?",
     servicePlaceholder: "Välj tjänst",
     otherService: "Annat / flera tjänster",
-    messageLabel: "Beskriv din trädgård",
-    messagePlaceholder: "Storlek på tomten, vilka träd eller häckar det gäller, önskat tillfälle …",
+    customerLabel: "Jag är",
+    customerTypes: ["Privatperson", "Försäkringsbolag", "Företag"],
+    messageLabel: "Beskriv ärendet",
+    messagePlaceholder: "Bilmodell, vad som ska lackeras eller repareras, önskad tid …",
     thanksTitle: "Tack – vi återkommer",
-    thanksText: "Din förfrågan är mottagen. Vi återkommer så snart vi kan med ett förslag.",
+    thanksText: "Din förfrågan är mottagen. Vi återkommer så snart vi kan.",
   },
 };
 

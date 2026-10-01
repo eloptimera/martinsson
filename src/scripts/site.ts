@@ -106,3 +106,29 @@ document.querySelectorAll<HTMLFormElement>("form[data-form]").forEach((form) => 
     }
   });
 });
+
+// ── Öppet/stängt just nu (enligt ordinarie öppettider, svensk tid) ───────────
+const openEl = document.querySelector<HTMLElement>("[data-open-status]");
+if (openEl) {
+  const parts = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Europe/Stockholm",
+    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
+  const day = get("weekday").toLowerCase();
+  const mins = Number(get("hour")) * 60 + Number(get("minute"));
+  const to = (h: number, m = 0) => h * 60 + m;
+  const weekday = ["mån", "tis", "ons", "tors"].some((d) => day.startsWith(d));
+  const friday = day.startsWith("fre");
+  const close = weekday ? to(17) : friday ? to(13) : 0;
+  const breaks = [[to(9), to(9, 30)], ...(weekday ? [[to(13), to(14)]] : [])];
+  const inBreak = breaks.some(([a, b]) => mins >= a && mins < b);
+  const open = close > 0 && mins >= to(7) && mins < close && !inBreak;
+  openEl.hidden = false;
+  openEl.innerHTML = `<span class="size-2.5 rounded-full ${open ? "bg-green-400" : "bg-signal"}"></span>${
+    open ? "Öppet just nu" : "Stängt just nu"
+  } <span class="font-normal text-white/70">(ordinarie öppettider)</span>`;
+}

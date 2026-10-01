@@ -5,97 +5,97 @@ import Icon from "./Icon.astro";
 
 const c = site.company;
 const link =
-  "rounded-sm underline decoration-transparent decoration-2 underline-offset-4 transition-colors duration-200 hover:decoration-lime";
-const heading = "text-xs font-bold tracking-[0.14em] text-lime uppercase";
+  "rounded-sm underline decoration-transparent decoration-2 underline-offset-4 transition-colors duration-200 hover:decoration-signal";
+const heading = "font-display text-lg font-bold tracking-[0.16em] text-white uppercase";
 ---
 
-<footer class="p-3 pt-12 sm:px-6">
-  <div class="panel-forest mx-auto max-w-[88rem] overflow-hidden rounded-[2rem]">
-    <div class="container-page grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
-      <div>
-        <Logo light />
-        <p class="mt-5 max-w-xs text-sm leading-relaxed text-white/75">
-          Trädgårdsskötsel för privatpersoner, bostadsrättsföreningar och företag i {c.area}.
-        </p>
-      </div>
+<footer class="panel-ink mt-20">
+  <div class="mx-auto grid max-w-[80rem] gap-12 px-5 py-16 sm:px-8 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
+    <div>
+      <Logo light />
+      <p class="mt-5 max-w-sm text-sm leading-relaxed text-white/75">
+        Med över 60 års erfarenhet och kompetens i lackeringsbranschen. Billackering, underredsbehandling,
+        plastreparationer och lackkonservering.
+      </p>
+    </div>
 
-      <div>
-        <p class={heading}>Tjänster</p>
-        <ul class="mt-4 space-y-2.5 text-sm text-white/85">
-          {site.services.map((t) => (
+    <div>
+      <p class={heading}>Tjänster</p>
+      <ul class="mt-4 space-y-2.5 text-sm text-white/85">
+        {site.services.map((t) => (
+          <li>
+            <a href={`/tjanster#${t.id}`} class={link}>
+              {t.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <p class={heading}>Sidor</p>
+      <ul class="mt-4 space-y-2.5 text-sm text-white/85">
+        {site.nav
+          .filter((n) => n.href !== "/tjanster")
+          .map((n) => (
             <li>
-              <a href={`/tjanster#${t.id}`} class={link}>
-                {t.title}
+              <a href={n.href} class={link}>
+                {n.label}
               </a>
             </li>
           ))}
-        </ul>
-      </div>
+        <li>
+          <a href="/integritetspolicy" class={link}>
+            Integritetspolicy
+          </a>
+        </li>
+      </ul>
+    </div>
 
-      <div>
-        <p class={heading}>Sidor</p>
-        <ul class="mt-4 space-y-2.5 text-sm text-white/85">
-          <li>
-            <a href="/om-oss" class={link}>
-              Om oss
-            </a>
-          </li>
-          <li>
-            <a href={site.navCta.href} class={link}>
-              {site.navCta.label}
-            </a>
-          </li>
-          <li>
-            <a href="/kontakt" class={link}>
-              Kontakt
-            </a>
-          </li>
-          <li>
-            <a href="/integritetspolicy" class={link}>
-              Integritetspolicy
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <p class={heading}>Kontakt</p>
-        <ul class="mt-4 space-y-3 text-sm text-white/85">
-          {c.phone && (
-            <li class="flex gap-3">
-              <Icon name="phone" class="mt-0.5 size-4 shrink-0 text-lime" />
-              <a href={`tel:${c.phoneLink}`} class={link}>
-                {c.phone}
-              </a>
-            </li>
-          )}
-          {c.email && (
-            <li class="flex gap-3">
-              <Icon name="mail" class="mt-0.5 size-4 shrink-0 text-lime" />
-              <a href={`mailto:${c.email}`} class={link}>
-                {c.email}
-              </a>
-            </li>
-          )}
+    <div>
+      <p class={heading}>Kontakt</p>
+      <ul class="mt-4 space-y-3 text-sm text-white/85">
+        <li class="flex gap-3">
+          <Icon name="phone" class="mt-0.5 size-4 shrink-0 text-signal" />
+          <a href={`tel:${c.phoneLink}`} class={link}>
+            {c.phone}
+          </a>
+        </li>
+        <li class="flex gap-3">
+          <Icon name="mail" class="mt-0.5 size-4 shrink-0 text-signal" />
+          <a href={`mailto:${c.email}`} class={link}>
+            {c.email}
+          </a>
+        </li>
+        {c.street && (
           <li class="flex gap-3">
-            <Icon name="pin" class="mt-0.5 size-4 shrink-0 text-lime" />
+            <Icon name="pin" class="mt-0.5 size-4 shrink-0 text-signal" />
             <address class="not-italic">
               {c.street}
               <br />
               {c.zip} {c.postalCity}
             </address>
           </li>
-        </ul>
-      </div>
+        )}
+        <li class="flex gap-3">
+          <Icon name="clock" class="mt-0.5 size-4 shrink-0 text-signal" />
+          <span>
+            Mån–tors 07–17
+            <br />
+            Fre 07–13
+          </span>
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <div class="border-t border-white/15">
-      <div class="container-page flex flex-wrap justify-between gap-2 py-6 text-xs text-white/70">
-        <span>
-          © {new Date().getFullYear()} {c.name} · Org.nr {c.orgnr}
-        </span>
-        <span>{c.taxNote}</span>
-      </div>
+  <div class="border-t border-white/15">
+    <div class="mx-auto flex max-w-[80rem] flex-wrap justify-between gap-2 px-5 py-6 text-xs text-white/70 sm:px-8">
+      <span>
+        © {new Date().getFullYear()} {c.name}
+        {c.orgnr && ` · Org.nr ${c.orgnr}`}
+      </span>
+      {c.taxNote && <span>{c.taxNote}</span>}
     </div>
   </div>
 </footer>

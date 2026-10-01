@@ -1,0 +1,147 @@
+---
+/**
+ * Hero-grafik: en blank, kobolt-lackerad bil i sidoprofil med glidande glans och färgprover.
+ * Ritad som SVG med brusfilter för metallflinga. Rent dekorativ.
+ * Byt mot ett riktigt foto via heroImage i src/site.config.ts om ni har ett.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+const BODY =
+  "M36 318 L36 276 C36 254 52 246 84 240 L168 226 C204 176 262 138 340 134 C418 130 478 152 520 202 L574 214 C606 220 626 238 628 270 L628 318 Z";
+---
+
+<svg
+  viewBox="0 0 664 420"
+  aria-hidden="true"
+  focusable="false"
+  class:list={["pointer-events-none overflow-visible", className]}
+>
+  <defs>
+    <linearGradient id="pp-paint" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7d97ff"></stop>
+      <stop offset="0.28" stop-color="#4a6cf0"></stop>
+      <stop offset="0.62" stop-color="#243a96"></stop>
+      <stop offset="1" stop-color="#0b1450"></stop>
+    </linearGradient>
+    <linearGradient id="pp-glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cfe0ff"></stop>
+      <stop offset="0.5" stop-color="#5d7bd6"></stop>
+      <stop offset="1" stop-color="#15215f"></stop>
+    </linearGradient>
+    <linearGradient id="pp-sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0.45"></stop>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+    </linearGradient>
+    <radialGradient id="pp-rim" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#e9edf8"></stop>
+      <stop offset="0.7" stop-color="#9aa4c4"></stop>
+      <stop offset="1" stop-color="#565f80"></stop>
+    </radialGradient>
+    <filter id="pp-blur" x="-30%" y="-80%" width="160%" height="260%">
+      <feGaussianBlur stdDeviation="14"></feGaussianBlur>
+    </filter>
+    <filter id="pp-blur-s" x="-10%" y="-30%" width="120%" height="160%">
+      <feGaussianBlur stdDeviation="4"></feGaussianBlur>
+    </filter>
+    <filter id="pp-flake" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" seed="5"></feTurbulence>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 7 -4.6"></feColorMatrix>
+    </filter>
+    <clipPath id="pp-clip">
+      <path d={BODY}></path>
+    </clipPath>
+  </defs>
+
+  <ellipse cx="332" cy="392" rx="300" ry="16" fill="#0b1450" opacity="0.4" filter="url(#pp-blur)"></ellipse>
+
+  <!-- karossen -->
+  <path d={BODY} fill="url(#pp-paint)"></path>
+  <g clip-path="url(#pp-clip)">
+    <rect x="30" y="120" width="610" height="210" filter="url(#pp-flake)" opacity="0.22"></rect>
+    <!-- taklinjens reflex -->
+    <path
+      d="M176 224 C214 176 268 146 340 142 C420 140 470 160 508 200 C440 170 360 164 290 176 C240 186 206 204 176 224 Z"
+      fill="#fff"
+      opacity="0.55"
+      filter="url(#pp-blur-s)"
+    ></path>
+    <!-- sidolinje -->
+    <path
+      d="M40 262 C150 246 300 244 438 252 C520 256 590 252 626 244"
+      fill="none"
+      stroke="#fff"
+      stroke-opacity="0.6"
+      stroke-width="3"
+      stroke-linecap="round"
+    ></path>
+    <path
+      d="M40 270 C150 256 300 254 438 262 C520 266 590 262 626 254"
+      fill="none"
+      stroke="#0b1450"
+      stroke-opacity="0.35"
+      stroke-width="3"
+    ></path>
+    <rect
+      class="sheen"
+      x="200"
+      y="110"
+      width="110"
+      height="230"
+      fill="url(#pp-sheen)"
+      style="transform-box:fill-box;transform-origin:center"
+    ></rect>
+  </g>
+
+  <!-- rutor -->
+  <path d="M192 224 C222 184 270 156 330 152 L330 224 Z" fill="url(#pp-glass)"></path>
+  <path d="M344 152 C412 152 462 170 496 212 L496 224 L344 224 Z" fill="url(#pp-glass)"></path>
+  <path
+    d="M192 224 C222 184 270 156 330 152"
+    fill="none"
+    stroke="#c9d4ff"
+    stroke-width="2"
+    opacity="0.8"
+  ></path>
+  <path
+    d="M206 214 C232 186 262 168 300 160"
+    stroke="#fff"
+    stroke-opacity="0.7"
+    stroke-width="5"
+    stroke-linecap="round"
+    fill="none"
+  ></path>
+
+  <!-- dörrhandtag, strålkastare, baklykta -->
+  <rect x="318" y="238" width="30" height="6" rx="3" fill="#0b1450" opacity="0.55"></rect>
+  <path d="M596 238 C612 238 624 246 626 260 L596 262 Z" fill="#fff6c8"></path>
+  <path d="M596 238 C612 238 624 246 626 260" fill="none" stroke="#fff" stroke-width="2" opacity="0.8"></path>
+  <rect x="36" y="262" width="12" height="16" rx="3" fill="#ff3b2f"></rect>
+
+  <!-- hjul -->
+  <g>
+    <circle cx="150" cy="320" r="52" fill="#080b1c"></circle>
+    <circle cx="150" cy="320" r="38" fill="#10152e"></circle>
+    <circle cx="150" cy="320" r="28" fill="url(#pp-rim)"></circle>
+    <g stroke="#565f80" stroke-width="5" stroke-linecap="round">
+      <path d="M150 300 L150 340"></path>
+      <path d="M130 320 L170 320"></path>
+      <path d="M136 306 L164 334"></path>
+      <path d="M164 306 L136 334"></path>
+    </g>
+    <circle cx="150" cy="320" r="7" fill="#10152e"></circle>
+    <circle cx="500" cy="320" r="52" fill="#080b1c"></circle>
+    <circle cx="500" cy="320" r="38" fill="#10152e"></circle>
+    <circle cx="500" cy="320" r="28" fill="url(#pp-rim)"></circle>
+    <g stroke="#565f80" stroke-width="5" stroke-linecap="round">
+      <path d="M500 300 L500 340"></path>
+      <path d="M480 320 L520 320"></path>
+      <path d="M486 306 L514 334"></path>
+      <path d="M514 306 L486 334"></path>
+    </g>
+    <circle cx="500" cy="320" r="7" fill="#10152e"></circle>
+  </g>
+  <path d="M36 318 L98 318 M202 318 L448 318 M552 318 L628 318" stroke="#0b1450" stroke-width="8"></path>
+</svg>

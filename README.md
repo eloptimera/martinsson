@@ -1,8 +1,8 @@
-# Västgöta Trädgårdsservice (Astro)
+# Martinssons Billackering (Astro)
 
-Webbplats för Västgöta Trädgårdsservice AB: snabb, statisk och utan backend. Byggd med Astro och Tailwind, **utan React**.
-Designen: grön yta med vitt fönsterkort, serif-rubriker med kursivt grönt ord och en egenritad gräsö
-(`src/components/GardenIsland.astro`, byt mot foto vid behov).
+Webbplats för Martinssons Billackering AB: snabb, statisk och utan backend. Byggd med Astro och Tailwind, **utan React**.
+Designen: industriell precision i kobolt-blått med kondenserad versal-typografi och en blank lackpanel som hero-grafik
+(`src/components/PaintPanel.astro`, byt mot foto vid behov).
 
 ```sh
 bun install
@@ -23,10 +23,10 @@ bun run check     # typkontroll
 
 ## Miljövariabler (Vercel → Settings → Environment Variables)
 
-| Variabel               | Vad                                                                                           |
-| ---------------------- | --------------------------------------------------------------------------------------------- |
-| `SITE_URL`             | Sajtens riktiga adress, t.ex. `https://example.se`. Används för kanoniska länkar och sitemap. |
-| `PUBLIC_FORM_ENDPOINT` | Adress som tar emot formulär (se nedan).                                                      |
+| Variabel               | Vad                                                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `SITE_URL`             | Sajtens riktiga adress, t.ex. `https://martinssonsbillackering.se`. Används för kanoniska länkar och sitemap. |
+| `PUBLIC_FORM_ENDPOINT` | Adress som tar emot formulär (se nedan).                                                                      |
 
 ## Formulär
 
@@ -34,11 +34,11 @@ Formuläret (`/kontakt`) skickar `POST` med JSON till `PUBLIC_FORM_ENDPOINT`:
 
 ```json
 {
-  "site": "vastgota-tradgard",
+  "site": "martinssons-billackering",
   "form": "kontakt",
   "namn": "…",
   "epost": "…",
-  "tjanst": "Häckklippning",
+  "tjanst": "Lackering",
   "…": "…"
 }
 ```
@@ -60,8 +60,8 @@ Formuläret (`/kontakt`) skickar `POST` med JSON till `PUBLIC_FORM_ENDPOINT`:
 
 ```
 src/site.config.ts     all kunddata och alla texter
-src/pages/             sidorna (index, tjanster, om-oss, kontakt, integritetspolicy, 404)
-src/components/        header, footer, gräsö, sidhuvud, ikoner
+src/pages/             sidorna (index, tjanster, om-oss, samarbetspartners, kontakt, integritetspolicy, 404)
+src/components/        header, footer, lackpanel, sidhuvud, ikoner
 src/scripts/site.ts    mobilmeny, scroll-animation, formulär (vanlig JavaScript)
 src/styles/global.css  färger, typsnitt och komponentklasser
 ```

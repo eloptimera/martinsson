@@ -3,27 +3,28 @@ import { site } from "../site.config";
 import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
 
+const c = site.company;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isActive = (href: string) =>
   href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
 const link =
-  "px-4 py-3 text-[0.95rem] font-medium whitespace-nowrap text-ink/75 transition-colors duration-200 hover:text-ink";
-const linkActive = "!text-ink font-bold underline decoration-leaf decoration-2 underline-offset-[10px]";
+  "relative px-3 py-3 font-display text-[1.1rem] font-semibold tracking-[0.06em] uppercase whitespace-nowrap text-ink/75 transition-colors duration-200 hover:text-brand";
+const linkActive = "!text-brand after:absolute after:inset-x-3 after:bottom-1 after:h-[3px] after:bg-signal";
 ---
 
-<header class="relative z-20">
+<header class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
   <a
     href="#innehall"
-    class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:font-bold focus:text-ink focus:shadow-lg"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:font-bold focus:text-ink focus:shadow-lg"
   >
     Hoppa till innehållet
   </a>
-  <div class="flex h-[5rem] items-center justify-between gap-6 px-6 sm:px-10">
-    <a href="/" aria-label={`${site.company.name} – startsida`} class="shrink-0">
+  <div class="mx-auto flex h-[4.75rem] max-w-[80rem] items-center justify-between gap-4 px-5 sm:px-8">
+    <a href="/" aria-label={`${c.name} – startsida`} class="shrink-0">
       <Logo />
     </a>
 
-    <nav class="hidden items-center gap-1 md:flex" aria-label="Huvudmeny">
+    <nav class="hidden items-center lg:flex" aria-label="Huvudmeny">
       {site.nav.map((l) => (
         <a
           href={l.href}
@@ -35,10 +36,18 @@ const linkActive = "!text-ink font-bold underline decoration-leaf decoration-2 u
       ))}
     </nav>
 
-    <a href={site.navCta.href} class="btn-base btn-brand hidden min-h-11 px-6 py-2 text-sm md:inline-flex">
-      <Icon name="leaf" class="size-4" />
-      {site.navCta.label}
-    </a>
+    <div class="hidden items-center gap-3 lg:flex">
+      <a
+        href={`tel:${c.phoneLink}`}
+        class="inline-flex min-h-11 items-center gap-2 font-display text-xl font-bold tracking-wide text-brand hover:text-brand-deep"
+      >
+        <Icon name="phone" class="size-5" />
+        {c.phone}
+      </a>
+      <a href={site.navCta.href} class="btn-base btn-brand min-h-11 px-5 py-2 text-base">
+        {site.navCta.label}
+      </a>
+    </div>
 
     <button
       type="button"
@@ -46,10 +55,10 @@ const linkActive = "!text-ink font-bold underline decoration-leaf decoration-2 u
       aria-label="Öppna meny"
       aria-expanded="false"
       aria-controls="mobilmeny"
-      class="group grid size-12 place-items-center rounded-full bg-tint text-ink md:hidden"
+      class="group grid size-12 place-items-center rounded-lg bg-muted text-ink lg:hidden"
     >
-      <Icon name="menu" class="size-5 group-aria-expanded:hidden" />
-      <Icon name="x" class="hidden size-5 group-aria-expanded:block" />
+      <Icon name="menu" class="size-6 group-aria-expanded:hidden" />
+      <Icon name="x" class="hidden size-6 group-aria-expanded:block" />
     </button>
   </div>
 
@@ -57,18 +66,22 @@ const linkActive = "!text-ink font-bold underline decoration-leaf decoration-2 u
     id="mobilmeny"
     hidden
     aria-label="Mobilmeny"
-    class="absolute inset-x-3 top-full z-30 flex flex-col gap-1 rounded-[1.5rem] bg-white p-3 shadow-xl shadow-ink/20 ring-1 ring-line md:hidden"
+    class="absolute inset-x-3 top-full z-30 mt-2 flex flex-col gap-1 rounded-xl bg-white p-3 shadow-2xl shadow-ink/25 ring-1 ring-line lg:hidden"
   >
     {site.nav.map((l) => (
       <a
         href={l.href}
-        class:list={[link, "py-3.5 text-base", isActive(l.href) && linkActive]}
+        class:list={[link, "py-3.5 text-xl", isActive(l.href) && linkActive]}
         aria-current={isActive(l.href) ? "page" : undefined}
       >
         {l.label}
       </a>
     ))}
-    <a href={site.navCta.href} class="btn-base btn-brand mt-1">
+    <a href={`tel:${c.phoneLink}`} class="btn-base btn-outline mt-2">
+      <Icon name="phone" class="size-5" />
+      {c.phone}
+    </a>
+    <a href={site.navCta.href} class="btn-base btn-brand">
       {site.navCta.label}
     </a>
   </nav>
