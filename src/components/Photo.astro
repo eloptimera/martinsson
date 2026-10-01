@@ -1,0 +1,21 @@
+---
+import type { Img } from "../site.config";
+interface Props {
+  img: Img | null;
+  class?: string;
+  priority?: boolean;
+}
+const { img, class: className = "", priority = false } = Astro.props;
+---
+
+{img && (
+  <img
+    src={img.src}
+    width={img.width}
+    height={img.height}
+    alt={img.alt}
+    loading={priority ? "eager" : "lazy"}
+    decoding="async"
+    class:list={["block h-auto w-full object-cover", className]}
+  />
+)}

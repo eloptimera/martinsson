@@ -1,59 +1,39 @@
 ---
 import Base from "../layouts/Base.astro";
 import PageHero from "../components/PageHero.astro";
-import Icon from "../components/Icon.astro";
+import Photo from "../components/Photo.astro";
 import { site } from "../site.config";
 
 const p = site.servicesPage;
 ---
 
 <Base title={site.seo.services.title} description={site.seo.services.description}>
-  <PageHero eyebrow={p.eyebrow} title={p.title} intro={p.intro}>
-    <a href={site.navCta.href} class="btn-base btn-white">
-      {site.navCta.label}
-    </a>
-    <a href={`tel:${site.company.phoneLink}`} class="btn-base btn-outline-white">
-      <Icon name="phone" class="size-5" />
-      {site.company.phone}
-    </a>
-  </PageHero>
+  <PageHero title={p.title} intro={p.intro} />
 
-  <div class="mx-auto grid max-w-[80rem] gap-5 px-5 py-16 sm:px-8 sm:py-24">
-    {site.services.map((t, i) => (
-      <div class="reveal">
-        <section
-          id={t.id}
-          aria-labelledby={`${t.id}-rubrik`}
-          class:list={[
-            "relative grid gap-8 overflow-hidden rounded-xl p-7 sm:p-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16",
-            i % 2 === 0 ? "bg-steel" : "border-2 border-line bg-white",
-          ]}
-        >
-          <span aria-hidden="true" class="absolute inset-y-0 left-0 w-1.5 bg-brand"></span>
+  <div class="container-page py-12 sm:py-16">
+    <ul class="divide-y divide-line border-y border-line">
+      {site.services.map((t) => (
+        <li class="grid gap-4 py-8 sm:grid-cols-[1fr_2fr] sm:gap-10">
           <div>
-            <span class="grid size-16 place-items-center rounded-lg bg-brand text-white">
-              <Icon name={t.icon} class="size-8" />
-            </span>
-            <h2 id={`${t.id}-rubrik`} class="mt-6 text-5xl sm:text-6xl">
-              {t.title}
+            <h2 class="text-2xl">
+              <a href={`/${t.id}`} class="text-brand hover:underline">
+                {t.title}
+              </a>
             </h2>
-            <p class="mt-4 max-w-md text-lg leading-relaxed text-muted-foreground">{t.short}</p>
+            <Photo
+              img={site.images.services[t.id as keyof typeof site.images.services] ?? null}
+              class="mt-4 aspect-[4/3] rounded"
+            />
           </div>
           <div>
-            <ul class="space-y-3">
-              {t.points.map((point) => (
-                <li class="flex gap-3 rounded-lg bg-white p-4 text-ink shadow-sm ring-1 ring-line">
-                  <Icon name="check" class="mt-0.5 size-5 shrink-0 text-brand" strokeWidth={3} />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-            <a href={site.navCta.href} class="btn-base btn-brand mt-6">
-              {p.quoteLabel(t.title)}
+            <p class="text-lg">{t.intro}</p>
+            <p class="mt-3 text-muted-foreground">{t.short}</p>
+            <a href={`/${t.id}`} class="mt-4 inline-block font-semibold text-brand hover:underline">
+              Läs mer om {t.title.toLowerCase()}
             </a>
           </div>
-        </section>
-      </div>
-    ))}
+        </li>
+      ))}
+    </ul>
   </div>
 </Base>

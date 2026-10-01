@@ -1,5 +1,5 @@
 /**
- * Liten klientkod för hela sajten: mobilmeny, scroll-animationer och formulär.
+ * Liten klientkod för hela sajten: mobilmeny, öppet/stängt och formulär.
  * Ingen ramverkskod – bara vanlig JavaScript.
  */
 
@@ -15,25 +15,6 @@ function setMenu(open: boolean) {
 menuButton?.addEventListener("click", () => setMenu(menuButton.getAttribute("aria-expanded") !== "true"));
 document.addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
 menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
-
-// ── Scroll-animation ──────────────────────────────────────────────────────
-const reveals = document.querySelectorAll<HTMLElement>(".reveal");
-if ("IntersectionObserver" in window && reveals.length) {
-  const io = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("reveal-in");
-          io.unobserve(entry.target);
-        }
-      }
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
-  );
-  reveals.forEach((el) => io.observe(el));
-} else {
-  reveals.forEach((el) => el.classList.add("reveal-in"));
-}
 
 // ── Formulär ──────────────────────────────────────────────────────────────
 const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT;
@@ -128,7 +109,7 @@ if (openEl) {
   const inBreak = breaks.some(([a, b]) => mins >= a && mins < b);
   const open = close > 0 && mins >= to(7) && mins < close && !inBreak;
   openEl.hidden = false;
-  openEl.innerHTML = `<span class="size-2.5 rounded-full ${open ? "bg-green-400" : "bg-signal"}"></span>${
+  openEl.innerHTML = `<span class="inline-block size-2.5 rounded-full ${open ? "bg-green-600" : "bg-red-600"}"></span>${
     open ? "Öppet just nu" : "Stängt just nu"
-  } <span class="font-normal text-white/70">(ordinarie öppettider)</span>`;
+  } <span class="font-normal text-muted-foreground">(ordinarie öppettider)</span>`;
 }

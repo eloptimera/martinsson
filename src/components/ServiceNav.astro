@@ -1,0 +1,28 @@
+---
+import { site } from "../site.config";
+interface Props {
+  current?: string;
+}
+const { current } = Astro.props;
+---
+
+<nav aria-label="Våra tjänster" class="border-b border-line bg-white">
+  <ul class="container-page flex gap-1 overflow-x-auto py-1">
+    {site.services.map((s) => (
+      <li>
+        <a
+          href={`/${s.id}`}
+          aria-current={current === s.id ? "page" : undefined}
+          class:list={[
+            "block px-3 py-3 text-[0.95rem] whitespace-nowrap hover:text-brand",
+            current === s.id
+              ? "font-semibold text-brand underline decoration-2 underline-offset-[10px]"
+              : "text-ink/80",
+          ]}
+        >
+          {s.title}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

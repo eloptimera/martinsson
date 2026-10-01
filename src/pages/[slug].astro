@@ -1,0 +1,92 @@
+---
+import Base from "../layouts/Base.astro";
+import ServiceNav from "../components/ServiceNav.astro";
+import Photo from "../components/Photo.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../site.config";
+
+export function getStaticPaths() {
+  return site.services.map((s) => ({ params: { slug: s.id }, props: { service: s } }));
+}
+
+const { service: t } = Astro.props;
+const c = site.company;
+const photo = site.images.services[t.id as keyof typeof site.images.services] ?? null;
+const title = `${t.title} – ${c.name}`;
+---
+
+<Base title={title} description={t.intro}>
+  <ServiceNav current={t.id} />
+  <Photo img={photo} priority class="max-h-[26rem]" />
+
+  <div class="container-page grid gap-12 py-12 sm:py-16 lg:grid-cols-[1fr_20rem] lg:gap-16">
+    <article class="max-w-3xl">
+      <h1 class="text-4xl sm:text-5xl">{t.title}</h1>
+      <p class="mt-5 text-xl leading-relaxed">{t.intro}</p>
+
+      {t.paragraphs.map((p) => (
+        <p class="mt-5 text-muted-foreground">{p}</p>
+      ))}
+
+      {t.list && (
+        <>
+          <h2 class="mt-10 text-xl">{t.listTitle}</h2>
+          <ul class="mt-3 columns-1 gap-8 sm:columns-2">
+            {t.list.map((x) => (
+              <li class="flex gap-3 py-1">
+                <Icon name="check" class="mt-1.5 size-4 shrink-0 text-brand" strokeWidth={3} />
+                {x}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {t.reasons && (
+        <ol class="mt-8 space-y-8">
+          {t.reasons.map((r, i) => (
+            <li class="grid grid-cols-[2.5rem_1fr] gap-4">
+              <span class="text-3xl font-bold text-brand tabular-nums" aria-hidden="true">
+                {i + 1}
+              </span>
+              <div>
+                <h2 class="text-xl">{r.title}</h2>
+                <p class="mt-2 text-muted-foreground">{r.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      <div class="mt-12 flex flex-wrap gap-3 border-t border-line pt-8">
+        <a href={site.navCta.href} class="btn-base btn-brand">
+          Begär offert på {t.title.toLowerCase()}
+        </a>
+        <a href={`tel:${c.phoneLink}`} class="btn-base btn-outline">
+          Ring {c.phone}
+        </a>
+      </div>
+    </article>
+
+    <aside class="lg:pt-2">
+      <div class="rounded-md border border-line p-6">
+        <h2 class="text-lg">Kontakta oss</h2>
+        <a href={`tel:${c.phoneLink}`} class="mt-2 block text-3xl font-bold text-brand hover:text-brand-deep">
+          {c.phone}
+        </a>
+        <a href={`mailto:${c.email}`} class="mt-1 block text-[0.95rem] break-all underline">
+          {c.email}
+        </a>
+        <h3 class="mt-5 text-base">Öppettider</h3>
+        <dl class="mt-1 text-[0.95rem]">
+          {c.hours.map((o) => (
+            <div class="flex justify-between gap-3 border-b border-line py-1.5 last:border-0">
+              <dt>{o.days}</dt>
+              <dd class="tabular-nums text-muted-foreground">{o.time}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </aside>
+  </div>
+</Base>

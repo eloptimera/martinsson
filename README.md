@@ -1,8 +1,8 @@
 # Martinssons Billackering (Astro)
 
 Webbplats för Martinssons Billackering AB: snabb, statisk och utan backend. Byggd med Astro och Tailwind, **utan React**.
-Designen: industriell precision i kobolt-blått med kondenserad versal-typografi och en blank lackpanel som hero-grafik
-(`src/components/PaintPanel.astro`, byt mot foto vid behov).
+Designen: sakligt och innehållsdrivet, med en blå färg (logotypens), tunna linjer och Inter. Sidorna fungerar lika bra med
+eller utan bilder: lägg riktiga foton och logotyp under `images` i `src/site.config.ts`.
 
 ```sh
 bun install
@@ -60,8 +60,8 @@ Formuläret (`/kontakt`) skickar `POST` med JSON till `PUBLIC_FORM_ENDPOINT`:
 
 ```
 src/site.config.ts     all kunddata och alla texter
-src/pages/             sidorna (index, tjanster, om-oss, samarbetspartners, kontakt, integritetspolicy, 404)
-src/components/        header, footer, lackpanel, sidhuvud, ikoner
-src/scripts/site.ts    mobilmeny, scroll-animation, formulär (vanlig JavaScript)
+src/pages/             sidorna (index, tjanster, [slug] = en sida per tjänst, om-oss, samarbetspartners, kontakt, integritetspolicy, 404)
+src/components/        header, footer, sidhuvud, bild, tjänstemeny
+src/scripts/site.ts    mobilmeny, öppet/stängt, formulär (vanlig JavaScript)
 src/styles/global.css  färger, typsnitt och komponentklasser
 ```

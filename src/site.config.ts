@@ -2,14 +2,30 @@
  * ALLT kundspecifikt ligger här: företagsuppgifter, texter, tjänster och SEO.
  * Ny kund = kopiera repot, ändra den här filen (och vid behov färgerna överst i src/styles/global.css).
  *
- * Skriv *ord* med stjärnor runt för att markera det (understruket i signalfärg) i rubriker.
  * Tomma fält (adress, orgnr) döljs automatiskt på sajten.
  */
-import type { IconName } from "./components/icons";
+export type Img = { src: string; width: number; height: number; alt: string };
 
 export const site = {
   /** Kort id som skickas med varje formulär, så en central mottagare vet vilken sajt det kom från. */
   id: "martinssons-billackering",
+
+  /**
+   * Riktiga bilder. Lägg filerna i /public och fyll i t.ex.
+   * { src: "/bilder/verkstad.jpg", width: 1600, height: 900, alt: "Verkstaden sedd från gatan" }.
+   * Lämnas ett fält som null visas ingen bild där, och sidan ser komplett ut ändå.
+   */
+  images: {
+    logo: null as null | Img,
+    hero: null as null | Img,
+    about: null as null | Img,
+    services: {
+      lackering: null as null | Img,
+      plastreparationer: null as null | Img,
+      rostskydd: null as null | Img,
+      lackvard: null as null | Img,
+    },
+  },
 
   company: {
     name: "Martinssons Billackering AB",
@@ -51,14 +67,13 @@ export const site = {
 
   seo: {
     home: {
-      title: "Billackering – Martinssons Billackering AB",
+      title: "Billackering, rostskydd och plastreparationer – Martinssons Billackering AB",
       description:
         "Billackering, rostskydd, lackvård och plastreparationer för privatpersoner, försäkringsbolag och företag. Över 60 års erfarenhet. Begär offert.",
     },
     services: {
-      title: "Tjänster: lackering, rostskydd, lackvård och plastreparationer – Martinssons Billackering AB",
-      description:
-        "Lackering, rostskydd med vaxbaserade medel, lackvård och plastreparationer. Se vad vi gör och begär offert.",
+      title: "Tjänster – Martinssons Billackering AB",
+      description: "Lackering, plastreparationer, rostskydd och lackvård. Se vad vi gör och begär offert.",
     },
     about: {
       title: "Om oss – Martinssons Billackering AB",
@@ -88,133 +103,115 @@ export const site = {
       id: "lackering",
       title: "Lackering",
       short: "Billackering för privatpersoner, försäkringsbolag och företag.",
-      points: [
-        "Lackering för privatpersoner, försäkringsbolag och företag",
-        "Underredsbehandling och lackkonservering",
-        "Leverans i rätt tid och med hög kvalitet",
+      intro:
+        "Vi använder alltid material som säkerställer en bra kvalitet på våra uppdrag och också bidrar till förbättring av miljön.",
+      paragraphs: ["Våra kunder är privatpersoner, försäkringsbolag och företag."],
+      listTitle: "Exempel på uppdrag är",
+      list: [
+        "personbilar, pick-up",
+        "småskador på lastbilar",
+        "småbättringar – så kallad spot repair",
+        "husbilar",
+        "samlarfordon",
+        "tävlingsbilar",
+        "motorcyklar, mopeder",
+        "sprutuppdrag på färdigslipade fordon",
+        "prototyper till industrin",
       ],
-      icon: "spray" as IconName,
+    },
+    {
+      id: "plastreparationer",
+      title: "Plastreparationer",
+      short: "Vi reparerar plastdetaljer i stället för att byta dem.",
+      intro:
+        "Vi reparerar stötfångare, strålkastare, innerskärmar, spoilers, skärmar till mc, mopeder, traktordelar med mera.",
+      paragraphs: [
+        "I stället för att byta ut dyra plastdetaljer kan vi i stället reparera och återställa detaljen till nyskick. Bra för din ekonomi och miljön.",
+        "Vi är sedan starten 1993 medlemmar i den rikstäckande reparationskedjan Bilplastteknik, vilket innebär att vi ständigt är uppdaterade med den senaste tekniken vad gäller material och utbildning.",
+      ],
     },
     {
       id: "rostskydd",
       title: "Rostskydd",
-      short:
-        "En kompletterande behandling med vaxbaserade medel är en förutsättning för att hålla rosten borta.",
-      points: [
-        "Behandling med vaxbaserade medel",
-        "Kompletterar bilens ordinarie rostskydd",
-        "Hjälper till att hålla rosten borta",
+      short: "En kompletterande behandling med vaxbaserade medel hjälper till att hålla rosten borta.",
+      intro: "Tre bra skäl till att rostskyddsbehandla din bil.",
+      paragraphs: [],
+      reasons: [
+        {
+          title: "Det nordiska klimatet",
+          text: "Fabriksrostskyddet fungerar i allmänhet bra på kontinenten men inte i vårt klimat. En kompletterande behandling med vaxbaserade medel är därför en förutsättning för att hålla rosten borta.",
+        },
+        {
+          title: "Krocksäkerhet",
+          text: "Rostskydd är inte bara en fråga om ekonomi utan också om säkerhet, eftersom rosten angriper skarvar och gör bilen mindre krocksäker. Låter du rostskyddsbehandla din bil ökar du således inte bara värdet och livslängden på bilen, du får också en säkrare bil.",
+        },
+        {
+          title: "Rostskyddsgarantier",
+          text: "För flera år sedan införde biltillverkare och bilförsäljare långvariga rostskyddsgarantier. Detta är en positiv utveckling. Man bör dock tänka på att fabriksgarantin bara gäller vid genomrostning av karossen. Rostangreppet måste dessutom ha börjat inifrån karossen för att garantin ska träda i kraft. Rostskyddsgarantierna är således ingen garanti för att bilen inte rostar.",
+        },
       ],
-      icon: "shield" as IconName,
     },
     {
       id: "lackvard",
       title: "Lackvård",
       short:
-        "Ge din bil regelbunden lackservice och du får en mer lättvättad bil, bättre glans och en lack som står sig länge.",
-      points: [
-        "Regelbunden lackservice",
-        "Mer lättvättad bil och bättre glans",
-        "En lack som står sig länge",
+        "Regelbunden lackservice ger en mer lättvättad bil, bättre glans och en lack som står sig länge.",
+      intro:
+        "Som allt annat utsätts också bilen för sol, nedfall, salt, avfettning med mera och behöver därför vårdas för att hålla bättre.",
+      paragraphs: [
+        "Ger du din bil en regelbunden lackservice får du en mer lättvättad bil, bättre glans och en lack som står sig bättre över tid.",
+        "Du kan ha olika servicegrad – polering, vaxning/lackkonservering och/eller penselbättring.",
+        "Lackskydda kan man göra både på ny och begagnad bil med likvärdigt resultat.",
       ],
-      icon: "sparkles" as IconName,
     },
-    {
-      id: "plastreparationer",
-      title: "Plastreparationer",
-      short: "Reparation av plastdetaljer på bilen, med efterföljande lackering.",
-      points: [
-        "Reparation av skadade plastdetaljer",
-        "Efterföljande lackering i rätt kulör",
-        "Kontakta oss så bedömer vi skadan",
-      ],
-      icon: "wrench" as IconName,
-    },
-  ],
+  ] as {
+    id: string;
+    title: string;
+    short: string;
+    intro: string;
+    paragraphs: string[];
+    listTitle?: string;
+    list?: string[];
+    reasons?: { title: string; text: string }[];
+  }[],
 
   home: {
-    eyebrow: "Billackering",
-    headline: "Lackering som *håller* – med över 60 års erfarenhet",
-    text: "Billackering, rostskydd, lackvård och plastreparationer för privatpersoner, försäkringsbolag och företag.",
+    headline: "Billackering, rostskydd och plastreparationer",
+    text: "Med över 60 års erfarenhet och kompetens i lackeringsbranschen. Våra kunder är privatpersoner, försäkringsbolag och företag.",
     cta: "Begär offert",
-    ctaSecondary: "Våra tjänster",
-    badge: "Över 60 års erfarenhet",
-
-    quickServices: "Våra tjänster",
-    quickHours: "Öppettider",
-    quickContact: "Kontakta oss",
-
-    servicesEyebrow: "Tjänster",
-    servicesHeading: "Fyra tjänster för en *välskött* lack",
-
-    customersEyebrow: "Våra kunder",
-    customersHeading: "För privatpersoner, försäkringsbolag och *företag*",
-    customers: [
-      {
-        icon: "users" as IconName,
-        title: "Privatpersoner",
-        text: "Lackering, lackvård och rostskydd till din egen bil.",
-      },
-      {
-        icon: "shield" as IconName,
-        title: "Försäkringsbolag",
-        text: "Lackering och reparationer i samband med skadeärenden.",
-      },
-      {
-        icon: "building" as IconName,
-        title: "Företag",
-        text: "Lackering för företag. Företagskunder kan beställa via e-post.",
-      },
-    ],
-
-    aboutEyebrow: "Om oss",
-    aboutHeading: "Välkända i lackeringsbranschen",
+    servicesHeading: "Våra tjänster",
+    customersHeading: "Våra kunder",
+    customersText:
+      "Vi lackerar och reparerar åt privatpersoner, försäkringsbolag och företag. Företagskunder kan beställa via e-post.",
+    aboutHeading: "Om oss",
     aboutQuote:
       "Med över 60 års erfarenheter och kompetens i lackeringsbranschen är vi väl kända i bygden. Vår ambition är att hålla en hög servicenivå och tillgodose våra kunders önskemål.",
     aboutLink: "Läs mer om oss",
-
-    ctaEyebrow: "Offert",
-    ctaHeading: "Berätta vad som ska *lackeras*",
+    ctaHeading: "Berätta vad som ska lackeras",
   },
 
   servicesPage: {
-    eyebrow: "Tjänster",
-    title: "Allt för en *välskött* lack",
+    title: "Våra tjänster",
     intro:
       "Lackering, rostskydd, lackvård och plastreparationer. Våra tjänster kännetecknas av att vara levererade i rätt tid med hög kvalitet.",
-    quoteLabel: (service: string) => `Begär offert på ${service.toLowerCase()}`,
   },
 
   aboutPage: {
-    eyebrow: "Om oss",
-    title: "Över *60 år* i lackeringsbranschen",
+    title: "Om oss",
     intro:
       "Martinssons Billackering är väl kända som förstahandsval av tjänster inom billackering, underredsbehandling, plastreparationer, lackkonservering och billacksbutik.",
     quote:
       "Med över 60 års erfarenheter och kompetens i lackeringsbranschen är vi väl kända i bygden. Vår ambition är att hålla en hög servicenivå och tillgodose våra kunders önskemål.",
     body: "Våra tjänster skall kännetecknas av att vara levererade i rätt tid med hög kvalitet och att kunden alltid ges ett gott bemötande.",
-    values: [
-      {
-        icon: "badge" as IconName,
-        title: "Erfarenhet",
-        text: "Över 60 års erfarenhet och kompetens i lackeringsbranschen.",
-      },
-      {
-        icon: "wrench" as IconName,
-        title: "Kvalitet",
-        text: "Hög kvalitet i varje uppdrag, från underredsbehandling till färdig lack.",
-      },
-      {
-        icon: "handshake" as IconName,
-        title: "Bemötande",
-        text: "Kunden ska alltid ges ett gott bemötande och levereras i rätt tid.",
-      },
+    facts: [
+      { title: "Erfarenhet", text: "Över 60 års erfarenhet och kompetens i lackeringsbranschen." },
+      { title: "Kvalitet", text: "Hög kvalitet i varje uppdrag, från underredsbehandling till färdig lack." },
+      { title: "Bemötande", text: "Kunden ska alltid ges ett gott bemötande och få leverans i rätt tid." },
     ],
   },
 
   partnersPage: {
-    eyebrow: "Samarbetspartners",
-    title: "Våra *samarbetspartners*",
+    title: "Samarbetspartners",
     intro: "Leverantörer och branschorganisationer vi samarbetar med.",
     partners: [
       { name: "Glasurit", url: "https://www.glasurit.se" },
@@ -226,8 +223,7 @@ export const site = {
   },
 
   contactPage: {
-    eyebrow: "Kontakt",
-    title: "Begär *offert* eller ring oss",
+    title: "Kontakt och offert",
     intro:
       "Beskriv vad som ska lackeras eller repareras så återkommer vi. Du kan också ringa oss under våra öppettider.",
     formTitle: "Skicka en förfrågan",
