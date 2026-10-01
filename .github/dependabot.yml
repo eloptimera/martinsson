@@ -1,0 +1,9 @@
+# Föreslår automatiskt uppdateringar av paket (inklusive säkerhetsfixar) som pull requests.
+# Det här är det som hindrar att en sajt en dag blockeras av Vercel för att ett paket blivit för gammalt.
+version: 2
+updates:
+  - package-ecosystem: "bun"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5

@@ -1,0 +1,15 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../site.config";
+---
+
+<Base title={site.seo.notFound.title} description={site.seo.notFound.description} noindex>
+  <section class="container-page flex min-h-[40vh] flex-col items-start justify-center py-12">
+    <p class="eyebrow">404</p>
+    <h1 class="mt-6 text-[clamp(2.5rem,7vw,6rem)]">Sidan finns inte</h1>
+    <p class="mt-6 max-w-md text-lg text-ink/80">Sidan du letar efter finns inte eller har flyttats.</p>
+    <a href="/" class="btn-base btn-brand mt-9">
+      Till startsidan
+    </a>
+  </section>
+</Base>

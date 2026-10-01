@@ -1,0 +1,101 @@
+---
+import { site } from "../site.config";
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+
+const c = site.company;
+const link =
+  "rounded-sm underline decoration-transparent decoration-2 underline-offset-4 transition-colors duration-200 hover:decoration-lime";
+const heading = "text-xs font-bold tracking-[0.14em] text-lime uppercase";
+---
+
+<footer class="p-3 pt-12 sm:px-6">
+  <div class="panel-forest mx-auto max-w-[88rem] overflow-hidden rounded-[2rem]">
+    <div class="container-page grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+      <div>
+        <Logo light />
+        <p class="mt-5 max-w-xs text-sm leading-relaxed text-white/75">
+          Trädgårdsskötsel för privatpersoner, bostadsrättsföreningar och företag i {c.area}.
+        </p>
+      </div>
+
+      <div>
+        <p class={heading}>Tjänster</p>
+        <ul class="mt-4 space-y-2.5 text-sm text-white/85">
+          {site.services.map((t) => (
+            <li>
+              <a href={`/tjanster#${t.id}`} class={link}>
+                {t.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <p class={heading}>Sidor</p>
+        <ul class="mt-4 space-y-2.5 text-sm text-white/85">
+          <li>
+            <a href="/om-oss" class={link}>
+              Om oss
+            </a>
+          </li>
+          <li>
+            <a href={site.navCta.href} class={link}>
+              {site.navCta.label}
+            </a>
+          </li>
+          <li>
+            <a href="/kontakt" class={link}>
+              Kontakt
+            </a>
+          </li>
+          <li>
+            <a href="/integritetspolicy" class={link}>
+              Integritetspolicy
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <p class={heading}>Kontakt</p>
+        <ul class="mt-4 space-y-3 text-sm text-white/85">
+          {c.phone && (
+            <li class="flex gap-3">
+              <Icon name="phone" class="mt-0.5 size-4 shrink-0 text-lime" />
+              <a href={`tel:${c.phoneLink}`} class={link}>
+                {c.phone}
+              </a>
+            </li>
+          )}
+          {c.email && (
+            <li class="flex gap-3">
+              <Icon name="mail" class="mt-0.5 size-4 shrink-0 text-lime" />
+              <a href={`mailto:${c.email}`} class={link}>
+                {c.email}
+              </a>
+            </li>
+          )}
+          <li class="flex gap-3">
+            <Icon name="pin" class="mt-0.5 size-4 shrink-0 text-lime" />
+            <address class="not-italic">
+              {c.street}
+              <br />
+              {c.zip} {c.postalCity}
+            </address>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/15">
+      <div class="container-page flex flex-wrap justify-between gap-2 py-6 text-xs text-white/70">
+        <span>
+          © {new Date().getFullYear()} {c.name} · Org.nr {c.orgnr}
+        </span>
+        <span>{c.taxNote}</span>
+      </div>
+    </div>
+  </div>
+</footer>

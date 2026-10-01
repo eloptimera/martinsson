@@ -1,0 +1,46 @@
+---
+import { site } from "../site.config";
+interface Props {
+  light?: boolean;
+  class?: string;
+}
+const { light = false, class: className = "" } = Astro.props;
+---
+
+<span class:list={["inline-flex items-center gap-3", className]}>
+  <span
+    aria-hidden="true"
+    class:list={[
+      "grid size-10 shrink-0 place-items-center rounded-xl",
+      light ? "bg-white text-brand" : "bg-brand text-white",
+    ]}
+  >
+    <svg
+      viewBox="0 0 24 24"
+      class="size-6"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M5 19C5 10 10.5 5 19 5c0 9-5 14-14 14Z"></path>
+      <path d="M5 19 13 11"></path>
+    </svg>
+  </span>
+  <span class="flex flex-col leading-none">
+    <span class:list={["font-display text-2xl", light ? "text-white" : "text-ink"]} aria-hidden="true">
+      {site.company.shortName}
+    </span>
+    <span
+      class:list={[
+        "mt-1.5 text-[0.62rem] font-bold tracking-[0.22em] uppercase",
+        light ? "text-white/75" : "text-leaf",
+      ]}
+      aria-hidden="true"
+    >
+      {site.company.tagline}
+    </span>
+    <span class="sr-only">{site.company.name}</span>
+  </span>
+</span>

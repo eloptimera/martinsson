@@ -1,0 +1,211 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../site.config";
+
+const c = site.company;
+const p = site.contactPage;
+const card = "flex gap-4 rounded-3xl bg-tint p-6";
+const icon = "mt-1 size-5 shrink-0 text-leaf";
+const label = "text-sm font-bold text-ink";
+---
+
+<Base title={site.seo.contact.title} description={site.seo.contact.description}>
+  <PageHero slot="hero" eyebrow={p.eyebrow} title={p.title} intro={p.intro} />
+
+  <section class="container-page grid gap-12 py-12 sm:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+    <div class="reveal">
+      <ul class="space-y-4">
+        {c.phone && (
+          <li class={card}>
+            <Icon name="phone" class={icon} />
+            <div>
+              <p class="eyebrow">Telefon</p>
+              <a
+                href={`tel:${c.phoneLink}`}
+                class="mt-1 block font-display text-2xl text-ink hover:text-leaf"
+              >
+                {c.phone}
+              </a>
+            </div>
+          </li>
+        )}
+        {c.email && (
+          <li class={card}>
+            <Icon name="mail" class={icon} />
+            <div>
+              <p class="eyebrow">E-post</p>
+              <a href={`mailto:${c.email}`} class="mt-1 block font-bold text-ink hover:text-leaf">
+                {c.email}
+              </a>
+            </div>
+          </li>
+        )}
+        <li class={card}>
+          <Icon name="pin" class={icon} />
+          <div>
+            <p class="eyebrow">Adress</p>
+            <address class="mt-1 font-bold text-ink not-italic">
+              {c.name}
+              <br />
+              {c.street}
+              <br />
+              {c.zip} {c.postalCity}
+            </address>
+            <a
+              href={`https://www.openstreetmap.org/search?query=${encodeURIComponent(`${c.street}, ${c.zip} ${c.postalCity}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-2 inline-block text-sm font-bold text-leaf underline"
+            >
+              Visa på karta
+            </a>
+          </div>
+        </li>
+        <li class="rounded-3xl bg-white p-6 shadow-md shadow-brand/10 ring-1 ring-line">
+          <p class="eyebrow">Så fungerar det</p>
+          <ol class="mt-4 space-y-4">
+            {site.home.steps.map((st, i) => (
+              <li class="flex gap-4">
+                <span class="grid size-10 shrink-0 place-items-center rounded-full bg-tint text-leaf">
+                  <Icon name={st.icon} class="size-5" />
+                </span>
+                <span>
+                  <span class="block font-bold text-ink">
+                    <span class="tabular-nums text-leaf" aria-hidden="true">
+                      0{i + 1}
+                    </span>{" "}
+                    {st.title}
+                  </span>
+                  <span class="mt-0.5 block text-sm leading-relaxed text-muted-foreground">{st.text}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </li>
+        {c.hours.length > 0 && (
+          <li class={card}>
+            <Icon name="clock" class={icon} />
+            <div>
+              <p class="eyebrow">Öppettider</p>
+              <dl class="mt-2 space-y-1 text-sm">
+                {c.hours.map((o) => (
+                  <div class="flex justify-between gap-6">
+                    <dt class="font-bold text-ink">{o.days}</dt>
+                    <dd class="text-muted-foreground">{o.time}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </li>
+        )}
+      </ul>
+    </div>
+
+    <div class="reveal" style="--d:120ms">
+      <form
+        data-form="kontakt"
+        class="grid gap-5 rounded-[1.75rem] bg-white p-7 shadow-xl shadow-brand/10 ring-1 ring-line sm:p-10"
+      >
+        <h2 class="text-4xl">{p.formTitle}</h2>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <label for="k-namn" class={label}>
+              Namn / företag
+            </label>
+            <input id="k-namn" name="namn" autocomplete="name" required class="field mt-2" />
+          </div>
+          <div>
+            <label for="k-epost" class={label}>
+              E-post
+            </label>
+            <input id="k-epost" name="epost" type="email" autocomplete="email" required class="field mt-2" />
+          </div>
+          <div>
+            <label for="k-telefon" class={label}>
+              Telefon
+            </label>
+            <input id="k-telefon" name="telefon" type="tel" autocomplete="tel" required class="field mt-2" />
+          </div>
+        </div>
+        <div>
+          <label for="k-tjanst" class={label}>
+            {p.serviceLabel}
+          </label>
+          <select id="k-tjanst" name="tjanst" required class="field mt-2">
+            <option value="" disabled selected>
+              {p.servicePlaceholder}
+            </option>
+            {site.services.map((t) => (
+              <option value={t.title}>{t.title}</option>
+            ))}
+            <option value={p.otherService}>{p.otherService}</option>
+          </select>
+        </div>
+        <div>
+          <label for="k-meddelande" class={label}>
+            {p.messageLabel}
+          </label>
+          <textarea
+            id="k-meddelande"
+            name="meddelande"
+            rows="5"
+            required
+            class="field mt-2"
+            placeholder={p.messagePlaceholder}
+          ></textarea>
+        </div>
+
+        <label class="flex items-start gap-3 text-sm text-muted-foreground">
+          <input
+            type="checkbox"
+            name="gdpr_samtycke"
+            value="ja"
+            required
+            class="mt-0.5 size-5 shrink-0 accent-brand"
+          />
+          <span>
+            Jag samtycker till att {c.name} lagrar mina uppgifter för att kunna besvara min förfrågan. Läs mer
+            i
+            <a href="/integritetspolicy" class="font-bold text-leaf underline">
+              {" "}
+              integritetspolicyn
+            </a>
+            .
+          </span>
+        </label>
+
+        <!-- Honeypot: dolt för människor, bottar fyller i det -->
+        <div class="sr-only" aria-hidden="true">
+          <label for="k-website">Lämna tomt</label>
+          <input id="k-website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <p data-form-status role="alert" hidden class="text-sm font-bold text-destructive"></p>
+        <div>
+          <button type="submit" data-submit class="btn-base btn-brand px-8">
+            Skicka förfrågan
+          </button>
+        </div>
+      </form>
+
+      <div
+        data-form-success="kontakt"
+        hidden
+        tabindex="-1"
+        role="status"
+        class="rounded-[1.75rem] bg-white p-8 shadow-xl shadow-brand/10 ring-1 ring-line sm:p-10"
+      >
+        <span class="grid size-12 place-items-center rounded-full bg-tint text-leaf">
+          <Icon name="check" class="size-6" strokeWidth={3} />
+        </span>
+        <h2 class="mt-5 text-4xl">{p.thanksTitle}</h2>
+        <p class="mt-4 text-muted-foreground">{p.thanksText}</p>
+        <a href="/" class="btn-base btn-outline mt-8">
+          Tillbaka till startsidan
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

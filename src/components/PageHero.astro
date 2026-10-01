@@ -1,0 +1,23 @@
+---
+import GardenIsland from "./GardenIsland.astro";
+import { mark } from "../lib/text";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro?: string;
+}
+const { eyebrow, title, intro } = Astro.props;
+---
+
+<div class="relative overflow-hidden rounded-b-[2rem] bg-[radial-gradient(55%_90%_at_88%_45%,#dff3d2_0%,#ffffff_72%)]">
+  <GardenIsland class="absolute top-1/2 right-4 hidden w-[27rem] -translate-y-1/2 lg:block xl:right-12" />
+  <div class="relative px-6 pt-8 pb-14 sm:px-12 sm:pt-12 sm:pb-20 lg:pb-24">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 class="mt-5 max-w-2xl text-[clamp(2.7rem,5.2vw,4.6rem)] leading-[1.04]" set:html={mark(title)} />
+    {intro && <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{intro}</p>}
+    <div class="mt-8 flex flex-wrap gap-3">
+      <slot />
+    </div>
+  </div>
+</div>
