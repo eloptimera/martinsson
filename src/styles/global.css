@@ -171,27 +171,6 @@
   text-transform: uppercase;
 }
 
-/* Hero: bilen "lackeras" från vänster till den diagonala linjen. Bara clip-path animeras. */
-@keyframes paint-sweep {
-  from {
-    clip-path: polygon(0 0, -0.6% 0, -29.8% 100%, 0 100%);
-  }
-  to {
-    clip-path: polygon(0 0, 65.4% 0, 36.2% 100%, 0 100%);
-  }
-}
-
-@utility paint-layer {
-  position: absolute;
-  inset: 0;
-  -webkit-mask-image: var(--car-mask);
-  mask-image: var(--car-mask);
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  clip-path: polygon(0 0, 65.4% 0, 36.2% 100%, 0 100%);
-  animation: paint-sweep 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -200,8 +179,5 @@
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
-  }
-  .paint-layer {
-    animation: none;
   }
 }

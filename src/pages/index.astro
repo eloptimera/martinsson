@@ -9,7 +9,7 @@ const h = site.home;
 ---
 
 <Base title={site.seo.home.title} description={site.seo.home.description}>
-  <!-- Hero: karossen i grundvitt, halvt lackerad i blått -->
+  <!-- Hero: karossen halvt i grundvitt, halvt lackerad i blått -->
   <section class="relative isolate overflow-hidden">
     <div class="mx-auto max-w-[88rem] px-5 pt-2 pb-10 sm:px-10">
       <div class="caps flex items-start justify-between gap-6 text-ink">
@@ -30,11 +30,8 @@ const h = site.home;
         ></span>
 
         <!-- Karossen -->
-        <figure
-          class="relative z-10 mx-auto -mt-[7vw] w-[min(94%,72rem)] sm:-mt-[6.5vw]"
-          style="--car-mask:url('/hero-car.webp')"
-        >
-          <div class="relative aspect-[1091/348]">
+        <figure class="relative z-10 mx-auto -mt-[7vw] w-[min(94%,72rem)] sm:-mt-[6.5vw]">
+          <div class="relative aspect-[1666/529]">
             <!-- Golvskugga -->
             <div
               aria-hidden="true"
@@ -42,36 +39,15 @@ const h = site.home;
             ></div>
             <img
               src="/hero-car.webp"
-              width="1091"
-              height="348"
-              alt="Bilkaross i grundvitt som är halvt lackerad i blått"
+              srcset="/hero-car-900.webp 900w, /hero-car.webp 1666w"
+              sizes="(min-width: 1152px) 1150px, 94vw"
+              width="1666"
+              height="529"
+              alt="Bilkaross som är halvt lackerad i blått och halvt i grundvitt"
               fetchpriority="high"
               decoding="async"
               class="absolute inset-0 size-full select-none"
             />
-            <!-- Blått lack: multiplicerar karossens skuggning -->
-            <div
-              class="paint-layer mix-blend-multiply"
-              style="background:linear-gradient(165deg,#4562e8 0%,#2a41ae 50%,#1b2a85 100%)"
-            ></div>
-            <!-- Fördjupar skuggor och veck i det lackerade -->
-            <div
-              class="paint-layer opacity-80 mix-blend-multiply"
-              style="background:url('/hero-car.webp') center/100% 100% no-repeat"
-            ></div>
-            <!-- Glans -->
-            <div
-              class="paint-layer opacity-60 mix-blend-screen"
-              style="background:radial-gradient(55% 60% at 26% 28%,rgba(255,255,255,.6),transparent 70%),linear-gradient(100deg,transparent 38%,rgba(255,255,255,.3) 50%,transparent 62%)"
-            ></div>
-            <!-- Den blå skiljelinjen -->
-            <svg
-              viewBox="0 0 1091 348"
-              aria-hidden="true"
-              class="pointer-events-none absolute inset-0 size-full overflow-visible"
-            >
-              <line x1="768" y1="-60" x2="372" y2="372" stroke="#243a96" stroke-width="2.5"></line>
-            </svg>
           </div>
         </figure>
       </div>
